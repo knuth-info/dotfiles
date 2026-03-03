@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-CHEZMOI_SOURCE="$(chezmoi source-path)"
+CHEZMOI_SOURCE="${CHEZMOI_SOURCE_DIR%/}"
 SSH_KEY="$HOME/.ssh/id_ed25519_knuth-info"
 
 git -C "$CHEZMOI_SOURCE" config user.name "Marcus Knuth"
