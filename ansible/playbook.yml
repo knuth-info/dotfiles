@@ -1,0 +1,13 @@
+---
+- name: Setup workstation
+  hosts: 127.0.0.1
+  connection: local
+  become: true
+  tasks:
+    - name: Install packages (Debian)
+      ansible.builtin.apt:
+        name:
+          - tmux
+        state: present
+        update_cache: true
+      when: ansible_os_family == "Debian"

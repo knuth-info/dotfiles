@@ -14,7 +14,8 @@ if [ -f /etc/debian_version ]; then
     $SUDO apt-get update -y
     $SUDO apt-get upgrade -y
     $SUDO apt-get install -y \
-        zsh
+        zsh \
+        ansible
     cd /tmp
     curl -LO "https://github.com/FiloSottile/age/releases/download/v${AGE_VERSION}/age-v${AGE_VERSION}-linux-amd64.tar.gz"
     tar xzf "age-v${AGE_VERSION}-linux-amd64.tar.gz"
