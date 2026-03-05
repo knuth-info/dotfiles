@@ -1,13 +1,47 @@
 ---
 - name: Setup workstation
-  hosts: 127.0.0.1
+  hosts: localhost
   connection: local
   become: true
+
   tasks:
-    - name: Install packages (Debian)
+    - name: Install tmux
       ansible.builtin.apt:
-        name:
-          - tmux
+        name: tmux
         state: present
-        update_cache: true
       when: ansible_os_family == "Debian"
+
+    - name: Install eza
+      block:
+        - name: Ensure /etc/apt/keyrings directory exists
+          ansible.builtin.file:
+            path: /etc/apt/keyrings
+            state: directory
+            mode: '0755'
+
+        - name: Download and dearmor eza GPG key
+          ansible.builtin.shell:
+            cmd: >
+              curl -fsSL https://raw.githubusercontent.com/eza-community/eza/main/deb.asc
+              | gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+            creates: /etc/apt/keyrings/gierens.gpg
+
+        - name: Add eza apt repository
+          ansible.builtin.apt_repository:
+            repo: "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main"
+            filename: gierens
+            state: present
+
+        - name: Set correct permissions on keyring and sources list
+          ansible.builtin.file:
+            path: "{{ item }}"
+            mode: '0644'
+          loop:
+            - /etc/apt/keyrings/gierens.gpg
+            - /etc/apt/sources.list.d/gierens.list
+
+        - name: Install eza
+          ansible.builtin.apt:
+            name: eza
+            state: present
+            update_cache: true
