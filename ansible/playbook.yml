@@ -13,6 +13,11 @@
 
     - name: Install eza
       block:
+        - name: Install gpg (required for keyring setup)
+          ansible.builtin.apt:
+            name: gpg
+            state: present
+
         - name: Ensure /etc/apt/keyrings directory exists
           ansible.builtin.file:
             path: /etc/apt/keyrings
