@@ -1,7 +1,7 @@
 #!/bin/bash
 # ansible dir hash:
-{{ range (glob (joinPath .chezmoi.sourceDir "ansible/**/*")) -}}
-#   {{ . | trimPrefix (joinPath .chezmoi.sourceDir "/") }}: {{ include . | sha256sum }}
+{{ range (glob (joinPath $.chezmoi.sourceDir "ansible/**/*")) -}}
+#   {{ . | trimPrefix (joinPath $.chezmoi.sourceDir "/") }}: {{ include . | sha256sum }}
 {{ end -}}
 set -euo pipefail
 
