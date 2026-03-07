@@ -1,0 +1,9 @@
+#!/bin/bash
+# ansible dir hash:
+{{ range (glob (joinPath .chezmoi.sourceDir "ansible/**/*")) -}}
+#   {{ . | trimPrefix (joinPath .chezmoi.sourceDir "/") }}: {{ include . | sha256sum }}
+{{ end -}}
+set -euo pipefail
+
+ansible-playbook --connection=local --inventory 127.0.0.1, \
+    "${CHEZMOI_SOURCE_DIR}/ansible/playbook.yml"
