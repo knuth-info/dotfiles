@@ -5,5 +5,5 @@
 {{ end -}}
 set -euo pipefail
 
-ansible-playbook --connection=local --inventory 127.0.0.1, \
+ansible-playbook -K --connection=local --inventory 127.0.0.1, \
     "${CHEZMOI_SOURCE_DIR}/ansible/playbook.yml"
