@@ -50,3 +50,19 @@
             name: eza
             state: present
             update_cache: true
+
+    - name: Install fzf from GitHub release
+      block:
+        - name: Get latest fzf version from GitHub
+          ansible.builtin.uri:
+            url: https://api.github.com/repos/junegunn/fzf/releases/latest
+            return_content: true
+          register: fzf_release
+
+        - name: Download and extract fzf binary
+          ansible.builtin.unarchive:
+            src: "https://github.com/junegunn/fzf/releases/download/{{ fzf_release.json.tag_name }}/fzf-{{ fzf_release.json.tag_name | regex_replace('^v', '') }}-linux_amd64.tar.gz"
+            dest: /usr/local/bin
+            remote_src: true
+            mode: '0755'
+            creates: /usr/local/bin/fzf
