@@ -11,4 +11,10 @@ autoload -Uz compinit && compinit
 # Prompt (erstmal simpel)
 PROMPT='%n@%m %~ %# '
 
+# eza aliases
+alias ls='eza --icons=always'
+alias la='eza -a --icons=always'
+alias lla='eza -la --icons=always --git --header'
+alias lls='eza -T --icons=always'
+
 export PATH="$HOME/.local/bin:$PATH"
