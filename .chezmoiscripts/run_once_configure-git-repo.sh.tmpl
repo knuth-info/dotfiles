@@ -1,3 +1,4 @@
+{{- if stat (joinPath .chezmoi.homeDir ".config/age/dotfiles-repo-key.txt") -}}
 #!/bin/bash
 set -euo pipefail
 
@@ -15,3 +16,4 @@ if [[ "$CURRENT_URL" == https://github.com/* ]]; then
     SSH_URL="${CURRENT_URL/https:\/\/github.com\//git@github.com:}"
     git -C "$CHEZMOI_SOURCE" remote set-url origin "$SSH_URL"
 fi
+{{- end }}

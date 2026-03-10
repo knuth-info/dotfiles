@@ -1,1 +1,5 @@
 ansible/
+{{ if not (stat (joinPath .chezmoi.homeDir ".config/age/dotfiles-repo-key.txt")) }}
+.ssh/id_ed25519_knuth-info
+.ssh/id_ed25519_knuth-info.pub
+{{ end }}
