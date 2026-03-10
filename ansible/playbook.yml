@@ -11,6 +11,12 @@
         state: present
       when: ansible_os_family == "Debian"
 
+    - name: Install bat
+      ansible.builtin.apt:
+        name: bat
+        state: present
+      when: ansible_os_family == "Debian"
+
     - name: Install eza
       block:
         - name: Install gpg (required for keyring setup)
