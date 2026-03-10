@@ -13,7 +13,7 @@ eval "$(fzf --zsh)"
 
 # fzf: Vorschau für Dateien (Ctrl+T) mit 'bat' (oder 'cat' als Fallback)
 export FZF_CTRL_T_OPTS="
-  --preview 'bat --color=always --style=numbers --line-range=:500 {}'
+  --preview 'batcat --color=always --style=numbers --line-range=:500 {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # fzf: Vorschau für Ordner (Alt+C) mit 'eza'
