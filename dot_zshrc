@@ -8,8 +8,13 @@ setopt HIST_IGNORE_DUPS
 # Completion
 autoload -Uz compinit && compinit
 
-# Prompt (erstmal simpel)
-PROMPT='%n@%m %~ %# '
+# fzf Integration (Vervollständigung & Tastenkürzel)
+eval "$(fzf --zsh)"
+
+# Pure Prompt laden
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
 
 # eza aliases
 alias ls='eza --icons=always'
@@ -18,3 +23,9 @@ alias lla='eza -la --icons=always --git --header'
 alias lls='eza -T --icons=always'
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# Auto-Suggestions
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Syntax Highlighting (Muss zwingend die letzte Zeile sein!)
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
