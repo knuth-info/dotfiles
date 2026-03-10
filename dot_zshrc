@@ -31,6 +31,9 @@ alias la='eza -a --icons=always'
 alias lla='eza -la --icons=always --git --header'
 alias lls='eza -T --icons=always'
 
+# bat alias for debian
+alias bat='batcat'
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # Auto-Suggestions
