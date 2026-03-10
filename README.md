@@ -10,7 +10,31 @@ This dotfiles repo is growing as I learn. The setup process is documented in the
 - set up git configuration for chezmoi repo with SSH key and age
 - set up ansible for software installation
 
-## Test in Containers
+## Test in Containers WITHOUT age key
+
+Testing in a container is as easy as
+
+Step 1 - start a container
+
+```zsh
+podman run -it --rm debian:bookworm-slim bash
+```
+
+Step 2 - install curl, git and nano
+
+```zsh
+apt update -y && apt upgrade -y && apt install curl git -y
+```
+
+Step 3 - install chezmoi and apply this repo
+
+```zsh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply knuth-info
+zsh
+```
+
+
+## Test in Containers WITH age key
 
 Testing in a container is as easy as
 
